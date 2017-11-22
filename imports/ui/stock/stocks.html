@@ -1,0 +1,104 @@
+<template name="stocks">
+    {{> nav}}
+    <section class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Stock list
+                </h2>
+            </div>
+            <div class="panel-body">
+                <p>Nothing.</p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                    Import form
+                    <br />
+                    <small>(dummy in this version)</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <form id="omen-import-stocks" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">CSV</label>
+                        <div class="col-sm-10">
+                            <label>
+                                <span class="btn btn-default">
+                                    Choose File
+                                    <input type="file" style="display:none">
+                                </span>
+                            </label>
+                            <input class="btn btn-warning" type="submit" value="Upload">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Form
+                    <br />
+                    <small>(dummy in this version)</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <form id="omen-add-stock" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="maker">Maker</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="maker" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Item name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="price">Price</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="price" value="1" min="0" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="carton">Q'ty per carton</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="carton" value="1" min="1" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="qty">Quantity</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="qty" value="1" min="1" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="unit-cost">Unit cost</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="unit-cost" value="1" min="0" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="unit-cost-tax">Unit cost + Tax</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="unit-cost-tax" value="1" min="0" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    {{> footer}}
+</template>

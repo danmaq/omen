@@ -1,0 +1,117 @@
+<template name="deliveries">
+    {{> nav}}
+    <section class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Delivery list
+                    <span class="badge">{{count}}</span>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    {{#each deliveries}} {{> delivery}} {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                    Import form
+                    <br />
+                    <small>(dummy in this version)</small>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <form id="omen-import-deiiveries" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">CSV</label>
+                        <div class="col-sm-10">
+                            <label>
+                                <span class="btn btn-default">
+                                    Choose File
+                                    <input type="file" style="display:none">
+                                </span>
+                            </label>
+                            <input class="btn btn-warning" type="submit" value="Upload">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Form
+                </h2>
+            </div>
+            <div class="panel-body">
+                <form id="omen-add-deiivery" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="date">Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="date" value="{{now}}" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="carton">Q'ty per carton</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="carton" value="1" min="1" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="qty">Quantity</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="qty" value="1" min="1" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="duty">Person in charge</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="duty" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="schedule">Delivery schedule</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="schedule" value="{{now}}" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="maker">Maker</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="maker" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Item name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="carton-order">Qty per carton at order</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="carton-order" value="1" min="1" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="qty-order">Qty at order</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="qty-order" value="1" min="1" required="required" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    {{> footer}}
+</template>

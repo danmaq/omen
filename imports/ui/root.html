@@ -1,0 +1,33 @@
+<template name="root">
+    {{> nav}}
+    <header class="jumbotron">
+        <div class="container">
+            <h1 class="jumbotron-h1">
+                <i class="fa fa-smile-o" aria-hidden="true"></i>MEN
+            </h1>
+            <p>
+                <strong>O</strong>pensource
+                <strong>M</strong>erchant
+                <strong>E</strong>nvironment
+                for
+                <strong>N</strong>-co.
+            </p>
+        </div>
+    </header>
+    <section class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Select forms</h2>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a class="list-group-item" href="/delivery">Delivery list</a>
+                    <a class="list-group-item" href="/order">Orders list</a>
+                    <a class="list-group-item" href="/payout">Payout list</a>
+                    <a class="list-group-item" href="/stock">Stocks list</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{> footer}}
+</template>
