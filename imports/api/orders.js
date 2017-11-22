@@ -5,19 +5,17 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 import Model from '../model/Model.js';
-import Delivery from '../model/Delivery.js';
+import Order from '../model/Order.js';
 
 /** Collection. */
-const collection = new Mongo.Collection('delivery');
+const collection = new Mongo.Collection('order');
 
 Meteor.methods({
-    'delivery.create': params => {
-        params.date = new Date(params.date);
-        params.schedule = new Date(params.schedule);
-        check(params, Model.structureWithoutId(Delivery.structure));
+    'order.create': params => {
+        check(params, Model.structureWithoutId(Order.structure));
         collection.insert(params);
     },
-    'delivery.remove': id => {
+    'order.remove': id => {
         check(id, String);
         collection.remove(id);
     },
