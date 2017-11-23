@@ -5,23 +5,26 @@ const structure = Object.freeze({ _id: String });
 
 /** base class for Model. */
 export default class Model {
-    /** Identity for MongoDB. */
+    /** Identifier for MongoDB. */
     _id = '';
 
     /** Clone object. */
     clone =
         (override = {}) => {
             const dst = new Model();
-            this.innerClone({ dst, override });
+            this.innerClone({ dst, override, structure });
             return dst;
         };
 
     /** Clone object. */
-    innerClone({ dst = new Model(), override = {} }) {
-        const key = '_id';
-        dst[key] = !!override && key in override ?
-            override[key] : this[key];
-    }
+    innerClone({ dst = new Model(), override = {}, structure = {} }) {
+        Object
+            .keys(structure)
+            .forEach(
+                k =>
+                dst[k] =
+                (!!override && k in override) ? override[k] : this[k]);
+    };
 
     /** Structure data without identity. */
     static structureWithoutId = ({ _id, ...rest }) => rest;

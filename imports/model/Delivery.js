@@ -1,6 +1,7 @@
 'use strict';
 
 import Model from './Model.js';
+import util from '../util/util.js';
 
 /** Structure data. */
 const structure =
@@ -16,6 +17,18 @@ const structure =
         orderCarton: Number,
         orderQty: Number,
     });
+
+const parsers = [
+    { key: 'date', parser: util.to.date },
+    { key: 'carton', parser: util.to.int },
+    { key: 'qty', parser: util.to.int },
+    { key: 'duty', parser: util.to.str },
+    { key: 'schedule', parser: util.to.date },
+    { key: 'maker', parser: util.to.str },
+    { key: 'name', parser: util.to.str },
+    { key: 'orderCarton', parser: util.to.int },
+    { key: 'orderQty', parser: util.to.int },
+];
 
 /** Model of delivery form. */
 export default class Delivery extends Model {
@@ -50,20 +63,22 @@ export default class Delivery extends Model {
     clone =
         (override = {}) => {
             const dst = new Delivery();
-            this.innerClone({ dst, override });
+            this.innerClone({ dst, override, structure });
             return dst;
         };
 
-    /** Clone object. */
-    innerClone({ dst = new Delivery(), override = {} }) {
-        Object
-            .keys(structure)
-            .forEach(
-                k =>
-                dst[k] =
-                (!!override && k in override) ? override[k] : this[k]);
-        super.innerClone({ dst, override });
-    };
+    /** Create CSV Row. */
+    toRow =
+        () => [
+            this.strDate,
+            this.carton,
+            this.qty,
+            this.strSchedule,
+            this.maker,
+            this.name,
+            this.orderCarton,
+            this.orderQty,
+        ];
 
     /** Localized date. */
     get strDate() { return this.date.toLocaleDateString(); }
@@ -73,4 +88,15 @@ export default class Delivery extends Model {
 
     /** Structure data. */
     static get structure() { return structure; }
+
+    static fromRow =
+        (row = []) =>
+        new Delivery().clone(
+            Object.assign({},
+                ...row.map(
+                    (v, i) =>
+                    ({
+                        [parsers[i].key]: parsers[i].parser(v)
+                    }))));
+
 }

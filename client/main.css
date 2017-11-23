@@ -2,3 +2,7 @@
 body {
     font-weight: 200;
 }
+
+.clickable-row {
+    cursor: pointer;
+}

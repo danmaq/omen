@@ -1,0 +1,53 @@
+<template name="deliveryDetail">
+    {{> nav}}
+    <section class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                    Delivery form
+                </h2>
+            </div>
+            <div class="panel-body">
+                <button type="button" class="btn btn-default omen-back">
+                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    Back / Cancel edit
+                </button>
+                <button type="button" class="btn btn-danger omen-delete">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Edit
+                </h2>
+            </div>
+            <div class="panel-body">
+                <form id="omen-update-deiivery" class="form-horizontal">
+                    {{> inputString id='date' label='Date' value=data.strDate required=true}}
+                    {{> inputNumber id='carton' label='Q\'ty per carton' value=data.carton min=1 required=true}}
+                    {{> inputNumber id='qty' label='Quantity' value=data.qty min=1 required=true}}
+                    {{> inputString id='duty' label='Person in charge' value=data.duty required=true}}
+                    {{> inputString id='schedule' label='Delivery schedule' value=data.strSchedule required=true}}
+                    {{> inputString id='maker' label='Maker' value=data.maker required=true}}
+                    {{> inputString id='name' label='Item name' value=data.name required=true}}
+                    {{> inputNumber id='carton-order' label='Q\'ty per carton at order' value=data.orderCarton min=1 required=true}}
+                    {{> inputNumber id='qty-order' label='Q\'ty at order' value=data.orderQty min=1 required=true}}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    {{> footer}}
+</template>

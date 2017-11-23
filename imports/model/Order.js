@@ -46,20 +46,9 @@ export default class Order extends Model {
     clone =
         (override = {}) => {
             const dst = new Order();
-            this.innerClone({ dst, override });
+            this.innerClone({ dst, override, structure });
             return dst;
         };
-
-    /** Clone object. */
-    innerClone({ dst = new Delivery(), override = {} }) {
-        Object
-            .keys(structure)
-            .forEach(
-                k =>
-                dst[k] =
-                (!!override && k in override) ? override[k] : this[k]);
-        super.innerClone({ dst, override });
-    };
 
     /** Structure data. */
     static get structure() { return structure; }

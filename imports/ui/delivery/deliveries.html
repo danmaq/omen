@@ -10,9 +10,34 @@
                 </h2>
             </div>
             <div class="panel-body">
-                <div class="list-group">
-                    {{#each deliveries}} {{> delivery}} {{/each}}
-                </div>
+                <table class="table table-responsive table-hover">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Date</th>
+                            <th>Q'ty per carton</th>
+                            <th>Q'ty</th>
+                            <th>Duty</th>
+                            <th>Schedule</th>
+                            <th>Maker</th>
+                            <th>Item</th>
+                            <th>Q'ty per carton at order</th>
+                            <th>Q'ty at order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each deliveries}} {{> delivery}} {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <button type="button" id="omen-export" class="btn btn-info">
+                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                    Export
+                </button>
+                <button type="button" id="omen-drop" class="btn btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Truncate
+                </button>
             </div>
         </div>
         <div class="panel panel-default">
@@ -30,12 +55,11 @@
                         <label class="col-sm-2 control-label" for="name">CSV</label>
                         <div class="col-sm-10">
                             <label>
-                                <span class="btn btn-default">
+                                <span class="btn btn-warning">
                                     Choose File
-                                    <input type="file" style="display:none">
+                                    <input id="file" type="file" style="display:none">
                                 </span>
                             </label>
-                            <input class="btn btn-warning" type="submit" value="Upload">
                         </div>
                     </div>
                 </form>
@@ -50,60 +74,15 @@
             </div>
             <div class="panel-body">
                 <form id="omen-add-deiivery" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="date">Date</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="date" value="{{now}}" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="carton">Q'ty per carton</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="carton" value="1" min="1" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="qty">Quantity</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="qty" value="1" min="1" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="duty">Person in charge</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="duty" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="schedule">Delivery schedule</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="schedule" value="{{now}}" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="maker">Maker</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="maker" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="name">Item name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="carton-order">Qty per carton at order</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="carton-order" value="1" min="1" required="required" autocomplete="on">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="qty-order">Qty at order</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="qty-order" value="1" min="1" required="required" autocomplete="on">
-                        </div>
-                    </div>
+                    {{> inputString id='date' label='Date' value=now required=true}}
+                    {{> inputNumber id='carton' label='Q\'ty per carton' value=1 min=1 required=true}}
+                    {{> inputNumber id='qty' label='Quantity' value=1 min=1 required=true}}
+                    {{> inputString id='duty' label='Person in charge' required=true}}
+                    {{> inputString id='schedule' label='Delivery schedule' value=now required=true}}
+                    {{> inputString id='maker' label='Maker' required=true}}
+                    {{> inputString id='name' label='Item name' required=true}}
+                    {{> inputNumber id='carton-order' label='Q\'ty per carton at order' value=1 min=1 required=true}}
+                    {{> inputNumber id='qty-order' label='Q\'ty at order' value=1 min=1 required=true}}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <input class="btn btn-primary" type="submit" value="Submit">

@@ -5,24 +5,26 @@ import { Template } from 'meteor/templating';
 
 import Deliveries from '../../api/deliveries.js';
 
-import formUtil from '../formUtil.js';
+import Delivery from '../../model/Delivery.js';
+
+import util from '../../util/util.js';
 
 import './delivery.js';
+import '../form.html';
 import './deliveries.html';
-import { parse } from 'url';
 
 /** Template for parsing. */
 const params =
     Object.freeze({
-        'date': formUtil.to.date,
-        'carton': formUtil.to.int,
-        'qty': formUtil.to.int,
-        'duty': formUtil.to.str,
-        'schedule': formUtil.to.date,
-        'maker': formUtil.to.str,
-        'name': formUtil.to.str,
-        'carton-order': formUtil.to.int,
-        'qty-order': formUtil.to.int,
+        'date': util.to.date,
+        'carton': util.to.int,
+        'qty': util.to.int,
+        'duty': util.to.str,
+        'schedule': util.to.date,
+        'maker': util.to.str,
+        'name': util.to.str,
+        'carton-order': util.to.int,
+        'qty-order': util.to.int,
     });
 
 /** List of keys that required to be converted. */
@@ -33,16 +35,47 @@ const convert =
     });
 
 Template.deliveries.onCreated(() => Meteor.subscribe('deliveries'));
+
 Template.deliveries.helpers({
     deliveries: () => Deliveries.find(),
     count: () => Deliveries.find().count(),
     now: new Date().toLocaleDateString(),
 });
+
 Template.deliveries.events({
+    'click #omen-drop': event => {
+        event.preventDefault();
+        if (
+            confirm(
+                'Cannot be undone. Do you really want to remove all records in this table?')) {
+            Meteor.call('delivery.drop');
+        }
+    },
+    'click #omen-export': event => {
+        event.preventDefault();
+        const raws = Deliveries.find().fetch();
+        const rows = raws.map(v => new Delivery().clone(v).toRow());
+        const body = Papa.unparse(rows, { quotes: true });
+        alert(body);
+    },
+    'change #omen-import-deiiveries #file': event => {
+        event.preventDefault();
+        const reader = new FileReader();
+        reader.onload =
+            () =>
+            Papa.parse(
+                reader.result, {
+                    complete: r => {
+                        console.log(r.data);
+                        alert('Not implemented yet. Show console.')
+                    }
+                });
+        reader.readAsText(event.target.files[0]);
+    },
     'submit #omen-add-deiivery': event => {
         event.preventDefault();
         const parsed =
-            formUtil.parse({ target: event.target, params, convert });
+            util.parse({ target: event.target, params, convert });
         Meteor.call('delivery.create', parsed);
     },
 });

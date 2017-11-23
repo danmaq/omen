@@ -1,6 +1,13 @@
 <template name="delivery">
-    <a class="list-group-item omen-detail" href="#">
-        <h3 class="list-group-item-heading">{{maker}}, {{name}} {{carton}} x {{qty}}</h3>
-        <p class="list-group-item-text">{{strDate}}({{strSchedule}}) Ordered: {{orderCarton}} x {{orderQty}}, Duty: Mr. {{duty}}, &lt;ID: {{_id}}&gt;</p>
-    </a>
+    <tr class="clickable-row omen-detail">
+        <td>{{strDate}}</td>
+        <td>{{carton}}</td>
+        <td>{{qty}}</td>
+        <td>{{duty}}</td>
+        <td>{{strSchedule}}</td>
+        <td>{{maker}}</td>
+        <td>{{name}}</td>
+        <td>{{orderCarton}}</td>
+        <td>{{orderQty}}</td>
+    </tr>
 </template>
